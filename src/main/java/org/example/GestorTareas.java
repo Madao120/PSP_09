@@ -1,28 +1,49 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GestorTareas {
 
     static void main() throws InterruptedException {
 
-        Descarga d1 = new Descarga("meditación.mp4");
-        Descarga d2 = new Descarga("albaricoque.mp4");
-        Descarga d3 = new Descarga("patata.mp4");
-        Descarga d4 = new Descarga("omóplato.mp4");
+        int tiempoTotalPrograma = 0;
 
-        d1.start();
-        d2.start();
-        d3.start();
-        d4.start();
+        // declaro esta variable apra saber cual es la descarga que tardó mas = lo que tardó el programa
+        int descargaMayor = 0;
 
-        d1.join();
-        d2.join();
-        d3.join();
-        d4.join();
+        List<Descarga> descargas = new ArrayList<>();
 
-        int tiempoTotalPrograma = d1.getTiempoTotal() + d2.getTiempoTotal() + d3.getTiempoTotal() + d4.getTiempoTotal();
+        descargas.add(new Descarga("meditación.mp4"));
+        descargas.add(new Descarga("albaricoque.mp4"));
+        descargas.add(new Descarga("patata.mp4"));
+        descargas.add(new Descarga("omóplato.mp4"));
 
+        // Bucle de iniciación de hilos
+        for (Descarga descarga : descargas) {
+            descarga.start();
+        }
+
+        // Debemos de separar el start() del join() para que haya concurrencia y no sea secuencial (no me olvidé)
+        for (Descarga descarga : descargas) {
+            descarga.join();
+        }
+
+        // Cálcular cual fue el que tardó más tiempo (por lo tanto es lo mismo que tardó el programa)
+        for (Descarga descarga : descargas){
+            tiempoTotalPrograma += descarga.getTiempoTotal();
+        }
+
+        // Calcular cuanto tardó el programa
+        for (Descarga descarga : descargas){
+            if (descarga.getTiempoTotal() > descargaMayor){
+                descargaMayor = descarga.getTiempoTotal();
+            }
+        }
+
+        System.out.println("======================================================");
         System.out.println("Todas las descargas han terminado");
-        System.out.println("El programa tardó " + Math.max(Math.max(d1.getTiempoTotal(), d2.getTiempoTotal()), Math.max(d3.getTiempoTotal(), d4.getTiempoTotal()))+ "ms") ;
+        System.out.println("El programa tardó " + descargaMayor + "ms") ;
         System.out.println("Si no hubiera concurrencia, el programa hubiera tardado:\n" + tiempoTotalPrograma);
     }
 }
