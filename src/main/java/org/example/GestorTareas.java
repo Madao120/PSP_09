@@ -24,7 +24,9 @@ public class GestorTareas {
         // Bucle de iniciación de hilos
         for (Descarga descarga : descargas) {
             descarga.start();
+            descarga.join();
         }
+
 
         // Debemos de separar el start() del join() para que haya concurrencia y no sea secuencial (no me olvidé)
         for (Descarga descarga : descargas) {
@@ -43,8 +45,8 @@ public class GestorTareas {
         long tiempoTotal = fin - inicio;
 
         System.out.println("======================================================");
-        System.out.println("Todas las descargas han terminado");
-        System.out.println("El programa tardó " + tiempoTotal / 1_000_000.0 + "ms") ;
-        System.out.println("Si no hubiera concurrencia, el programa hubiera tardado:\n" + tiempoTotalHilosSuma);
+        System.out.println("Todas las descargas han terminado.");
+        System.out.println("Tiempo real: " + tiempoTotal/1_000_000.0 + "ms") ;
+        System.out.println("Si no hubiera concurrencia, el programa hubiera tardado: " + tiempoTotalHilosSuma + "ms");
     }
 }

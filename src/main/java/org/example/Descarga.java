@@ -33,8 +33,10 @@ public class Descarga extends Thread {
             // el +(int) es para pasar el random, que es un double a int, para que no tenga decimales
             this.tiempoBloque = 100 + (int)(Math.random() * 400);
 
+            // Añadimos lo que tardará este bloque al tiepo total del hilo
             setTiempoTotal(this.tiempoTotal += tiempoBloque);
 
+            // Para implementar un sleep tendremos que hacer un try catch en caso de que se interrumpa el hilo.
             try {
                 Thread.sleep(tiempoBloque);
                 System.out.println("Descargando "+archivo+": "+ i + "0%");
@@ -44,6 +46,7 @@ public class Descarga extends Thread {
             }
         }
 
+        // Después de que se descarguen los bloques diremos que se ha completado la descarga
         System.out.println(archivo+ " completada en " + getTiempoTotal() + "ms");
     }
 }
