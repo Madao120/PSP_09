@@ -7,10 +7,12 @@ public class GestorTareas {
 
     static void main() throws InterruptedException {
 
-        int tiempoTotalPrograma = 0;
+        int tiempoTotalHilosSuma = 0;
 
-        // declaro esta variable apra saber cual es la descarga que tardó mas = lo que tardó el programa
-        int descargaMayor = 0;
+        // Atributo para establecer cuando empieza el programa
+        // ----------------------------------------------------------------
+        // (ChatGpt me ayudó a entender el funcionamiento de esta variable)
+        long inicio = System.nanoTime();
 
         List<Descarga> descargas = new ArrayList<>();
 
@@ -31,19 +33,18 @@ public class GestorTareas {
 
         // Cálcular cual fue el que tardó más tiempo (por lo tanto es lo mismo que tardó el programa)
         for (Descarga descarga : descargas){
-            tiempoTotalPrograma += descarga.getTiempoTotal();
+            tiempoTotalHilosSuma += descarga.getTiempoTotal();
         }
 
-        // Calcular cuanto tardó el programa
-        for (Descarga descarga : descargas){
-            if (descarga.getTiempoTotal() > descargaMayor){
-                descargaMayor = descarga.getTiempoTotal();
-            }
-        }
+        //Establecemos aquí que termina el prorgama, por lo que guardamos cuando fué
+        long fin = System.nanoTime();
+
+        // Ponemos el momento de inicio y fin del programa, sacando cuanto tardó en ms
+        long tiempoTotal = fin - inicio;
 
         System.out.println("======================================================");
         System.out.println("Todas las descargas han terminado");
-        System.out.println("El programa tardó " + descargaMayor + "ms") ;
-        System.out.println("Si no hubiera concurrencia, el programa hubiera tardado:\n" + tiempoTotalPrograma);
+        System.out.println("El programa tardó " + tiempoTotal / 1_000_000.0 + "ms") ;
+        System.out.println("Si no hubiera concurrencia, el programa hubiera tardado:\n" + tiempoTotalHilosSuma);
     }
 }
