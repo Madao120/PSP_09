@@ -1,0 +1,49 @@
+package org.example;
+
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+public class Descarga extends Thread {
+
+    private String archivo;
+    private int tiempoBloque;
+    private int tiempoTotal;
+
+    public int getTiempoTotal() {
+        return tiempoTotal;
+    }
+
+    public void setTiempoTotal(int tiempoTotal) {
+        this.tiempoTotal = tiempoTotal;
+    }
+
+    public Descarga(String archivo) {
+        super(archivo);
+        this.archivo = archivo;
+    }
+
+    @Override
+    public void run() {
+        System.out.println("Descargando: " + archivo);
+
+        for (int i = 1; i < 11; i++) {
+            // Explicación del sleep aleatorio
+            // 100 es el mínimo que puede tardar, en este caso 100ms,
+            // y lo máximo es 100 + (numero random de 0 a 0.9999 * 400),
+            // por lo tanto puede tardar desde 100ms a 499
+            // el +(int) es para pasar el random, que es un double a int, para que no tenga decimales
+            this.tiempoBloque = 100 + (int)(Math.random() * 400);
+
+            setTiempoTotal(this.tiempoTotal += tiempoBloque);
+
+            try {
+                Thread.sleep(tiempoBloque);
+                System.out.println("Descargando "+archivo+": "+ i + "0%");
+            }
+            catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        System.out.println(archivo+ " completada en " + getTiempoTotal() + "ms");
+    }
+}
