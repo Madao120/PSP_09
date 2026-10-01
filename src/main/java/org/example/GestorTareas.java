@@ -19,6 +19,10 @@ public class GestorTareas {
         d3.join();
         d4.join();
 
+        int tiempoTotalPrograma = d1.getTiempoTotal() + d2.getTiempoTotal() + d3.getTiempoTotal() + d4.getTiempoTotal();
+
         System.out.println("Todas las descargas han terminado");
+        System.out.println("El programa tardó " + Math.max(Math.max(d1.getTiempoTotal(), d2.getTiempoTotal()), Math.max(d3.getTiempoTotal(), d4.getTiempoTotal()))+ "ms") ;
+        System.out.println("Si no hubiera concurrencia, el programa hubiera tardado:\n" + tiempoTotalPrograma);
     }
 }
