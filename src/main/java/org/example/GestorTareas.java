@@ -21,17 +21,25 @@ public class GestorTareas {
         descargas.add(new Descarga("patata.mp4"));
         descargas.add(new Descarga("omóplato.mp4"));
 
+        // NIVEL 2, crear Monitor con Runnable, por ello creamos el objeto Runnable insertándolo en Thread
+        Monitor monitor = new Monitor(descargas);
+        Thread hiloMonitor = new Thread(monitor);
+
         // Bucle de iniciación de hilos
         for (Descarga descarga : descargas) {
             descarga.start();
-            descarga.join();
         }
 
+        //Una vez inicien los hilos, mientras estén en ejecución (antes del .join()) iniciaremos Monitor
+        hiloMonitor.start();
 
         // Debemos de separar el start() del join() para que haya concurrencia y no sea secuencial (no me olvidé)
         for (Descarga descarga : descargas) {
             descarga.join();
         }
+
+        // NIVEL 2, Una vez terminan los hilos de descarga, esperaremos a que termine el hilo Monitor
+        hiloMonitor.join();
 
         // Cálcular cual fue el que tardó más tiempo (por lo tanto es lo mismo que tardó el programa)
         for (Descarga descarga : descargas){
