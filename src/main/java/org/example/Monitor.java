@@ -27,6 +27,7 @@ public class Monitor  implements Runnable {
                 if (descarga.isAlive()) {
                     activas++;
                 }
+                System.out.println("[Monitor] Descargas en curso: "+ activas);
             }
 
             // En caso de que ya no haya ninguna descarga viva en descargas, imprimiremos el mensaje de que han terminado, rompiendo el bucle
@@ -45,6 +46,5 @@ public class Monitor  implements Runnable {
             }
         }
 
-        System.out.println("[Monitor] No queda ninguna descarga en curso");
     }
 }

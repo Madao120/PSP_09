@@ -23,7 +23,7 @@ public class Descarga extends Thread {
 
     @Override
     public void run() {
-        System.out.println("Descargando: " + archivo);
+        System.out.println("[Descarga] Descargando: " + archivo);
 
         for (int i = 1; i < 11; i++) {
             // Explicación del sleep aleatorio
@@ -39,7 +39,7 @@ public class Descarga extends Thread {
             // Para implementar un sleep tendremos que hacer un try catch en caso de que se interrumpa el hilo.
             try {
                 Thread.sleep(tiempoBloque);
-                System.out.println("Descargando "+archivo+": "+ i + "0%");
+                System.out.println("[Descarga] Descargando "+archivo+": "+ i + "0%");
             }
             catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -47,6 +47,6 @@ public class Descarga extends Thread {
         }
 
         // Después de que se descarguen los bloques diremos que se ha completado la descarga
-        System.out.println(archivo+ " completada en " + getTiempoTotal() + "ms");
+        System.out.println("[Descarga]" + archivo+ " completada en " + getTiempoTotal() + "ms");
     }
 }
