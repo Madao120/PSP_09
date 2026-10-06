@@ -79,7 +79,7 @@ public class GestorTareas {
                     System.out.println(AMARILLO + "[Main]" + FIN + " meditacion.mp4 sigue en segundo plano");
                 }
                 else{
-                    System.out.println(AMARILLO + "[Main]" + FIN + " meditacion.mp4 ha terminado antes de 4 segundos");
+                    System.out.println(AMARILLO + "[Main]" + FIN + " meditacion.mp4 ha terminado antes de 3 segundos");
                 }
             }
 
