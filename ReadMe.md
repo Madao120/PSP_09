@@ -33,7 +33,7 @@ El tiempo real, y tiempo sin concurrencia son casi lo mismo. Cercanos a 12100 ms
 
 # Nivel 2
 Realizaré la ejecución del programa con argumentos, mostrando una salida distinta con los nombres cambiados, en ved de ser mantra, meditacion, etc serán:
-Hola Bien Gracias
+hola adios gracias
 ![img4](/capturas/4.png)
 
 A demás de eso, observaremos como Monitor estará imprimiendo las descargas activas, y en caso de que no queden, indicará que no hay más descargas activas
