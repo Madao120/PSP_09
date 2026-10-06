@@ -39,10 +39,25 @@ El tiempo real, y tiempo sin concurrencia son casi lo mismo. Cercanos a 12100 ms
 
 
 
-#Incidencias
+# Incidencias
 
-###Incidencia 1 
+### Incidencia 1 
 A la hora de sacar el tiempo total del programa, concurrentemente, pensé en sacar el tiempo del último hilo, pero esa opción no me paercía válida.<br>
 Por lo que acabé aprendiendo gracias a las IA el uso de nanoTime(), el cual se puede declarar varias veces, lo declaré al principio y al final, luego, en el sout final hice el cálculo de final - pcincipio pasando la información a ms.
 
+### Incidencia 2
+Esta incidencia venía derivada de la anterior, debido a que usando nanoTime devolvía el tiempo total, por lo que tenía que dividirlo en 1_000_000.0, eso me daba muchos decimales, <br>
+y al comparar el tiempo total entre lo que hubiera tardado de forma secuencial; podría dar confusión al ver un número tan grande, por lo que opté por usar String.format<br>
+en el cual dejamos el resultado igual hasta el ., ("%."), luego del punto solo permitimos 0 unidades más (.0f") por lo que la operación total fue esta
+String.format("%.0f", tiempoTotal / 1_000_000.0)
+
+**Antes:**
+Tiempo real: 4048.6488ms
+Si no hubiera concurrencia, el programa hubiera tardado: 11802ms
+
+**Ahora**
+Tiempo real: 4048ms
+Si no hubiera concurrencia, el programa hubiera tardado: 11802ms
+
+Se observa mucho mejor la diferencia entre cifras sin los decimales.
 

@@ -27,7 +27,6 @@ public class Monitor  implements Runnable {
                 if (descarga.isAlive()) {
                     activas++;
                 }
-                System.out.println("[Monitor] Descargas en curso: "+ activas);
             }
 
             // En caso de que ya no haya ninguna descarga viva en descargas, imprimiremos el mensaje de que han terminado, rompiendo el bucle
@@ -36,7 +35,7 @@ public class Monitor  implements Runnable {
                 hayDescargasVivas = false;
             }
             else{
-
+                System.out.println("[Monitor] Descargas en curso: "+ activas);
                 // Ahora esperaremos 500 ms para la siguiente iteración, que sguirá comprobando hasta que no haya más descargas activas
                 try {
                     Thread.sleep(500);

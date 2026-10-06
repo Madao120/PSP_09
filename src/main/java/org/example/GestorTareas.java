@@ -5,7 +5,7 @@ import java.util.List;
 
 public class GestorTareas {
 
-    static void main() throws InterruptedException {
+    static void main(String[] args) throws InterruptedException {
 
         int tiempoTotalHilosSuma = 0;
 
@@ -16,10 +16,34 @@ public class GestorTareas {
 
         List<Descarga> descargas = new ArrayList<>();
 
+        /* NIVEL 1, en nivel 1 directamente creaba los nombres directamente
         descargas.add(new Descarga("cuarzos.png"));
         descargas.add(new Descarga("meditacion.mp4"));
         descargas.add(new Descarga("mantras.mp3"));
         descargas.add(new Descarga("horoscopo.pdf"));
+        */
+
+        // NIVEL 2, ahora pasamos los nombres de descarga por argumentos
+        // y en caso de que no se introduzca nada, haremos como antes, escribiendo directamente los nombres
+        String[] nombresArgumentos;
+
+        if (args.length == 0) {
+            nombresArgumentos = new String[]{
+                    "cuarzos.png",
+                    "meditacion.mp4",
+                    "mantras.mp3",
+                    "horoscopo.pdf"
+            };
+        } else {
+            nombresArgumentos = args;
+        }
+
+        // Ahora una vez obtenido los nombre de args o directamente poniendo los default, crearemos los hilos
+
+        for (int i = 0; i < nombresArgumentos.length; i++) {
+
+            descargas.add(new Descarga(nombresArgumentos[i]));
+        }
 
         // NIVEL 2, crear Monitor con Runnable, por ello creamos el objeto Runnable insertándolo en Thread
         Monitor monitor = new Monitor(descargas);
@@ -80,7 +104,8 @@ public class GestorTareas {
 
         System.out.println("======================================================");
         System.out.println("Todas las descargas han terminado.");
-        System.out.println("Tiempo real: " + tiempoTotal/1_000_000.0 + "ms") ;
+        // Para truncar los decimales me acabó ayudando la IA, no tenía los conocimientos para hacer la operación en una sola línea
+        System.out.println("Tiempo real: " + String.format("%.2f", tiempoTotal / 1_000_000.0) + "ms") ;
         System.out.println("Si no hubiera concurrencia, el programa hubiera tardado: " + tiempoTotalHilosSuma + "ms");
     }
 }
