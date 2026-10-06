@@ -20,24 +20,37 @@ Al hacer start y join estaríamos rompiendo al concurrencia, esto debido a que e
 Aquí el ejemplo:
 
 Código (incumpliendo concurrencia):
-![](/capturas/1.png)
+![img1](/capturas/1.png)
 
 Respuesta:
-![](/capturas/2.png)
+![img2](/capturas/2.png)
 como se puede observar, los hilos se ejecutan uno despues del otro, esperando a que acabe el anterior, no a la vez
 
 Resultado:
-![](/capturas/3.png)
+![img3](/capturas/3.png)
 De hecho, se puede ver como tarda mucho más que si hubiera concurrencia<br>
 El tiempo real, y tiempo sin concurrencia son casi lo mismo. Cercanos a 12100 ms.
 
 # Nivel 2
+Realizaré la ejecución del programa con argumentos, mostrando una salida distinta con los nombres cambiados, en ved de ser mantra, meditacion, etc serán:
+Hola Bien Gracias
+![img4](/capturas/4.png)
 
-
+A demás de eso, observaremos como Monitor estará imprimiendo las descargas activas, y en caso de que no queden, indicará que no hay más descargas activas
+![img5](/capturas/5.png)
 
 # Nivel 3
+Para estas demostraciones, no usaré los args, debido a que instalador solo buscará meditacion y mantra, si pusieramos args personalizados; Instalador funcionaría.
 
+Inicia como cualquier otro nivel
+![img6](/capturas/6.png)
 
+A los 3 segundos, MAIN saltará indicando si en estos 3 segundos terminó meditación.<br>
+En este caso, meditación tardó más de 3 segundos, por lo que indicará que meditacon.mp4 sigue en segundo plano
+![img7](/capturas/7.png)
+
+Aquí una captura de lo que sucede e caso de que sí termine antes de 3 segundos (tuve que ejecutarlo 6 veces)
+![img8](/capturas/8.png)
 
 # Incidencias
 
