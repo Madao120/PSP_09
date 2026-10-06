@@ -5,6 +5,10 @@ import java.util.List;
 
 public class GestorTareas {
 
+    // Colorines    Main-Amarillo, Azul-Descarga, Morado-Monitor, Verde-Instalador
+    public static final String FIN = "\u001B[0m";
+    public static final String AMARILLO = "\u001B[33m";
+
     static void main(String[] args) throws InterruptedException {
 
         int tiempoTotalHilosSuma = 0;
@@ -72,10 +76,10 @@ public class GestorTareas {
             if(descarga.getName() == "meditacion.mp4"){
                 descarga.join(3000);
                 if (descarga.isAlive()){
-                    System.out.println("[Main] meditacion.mp4 sigue en segundo plano");
+                    System.out.println(AMARILLO + "[Main]" + FIN + " meditacion.mp4 sigue en segundo plano");
                 }
                 else{
-                    System.out.println("[Main] meditacion.mp4 ha terminado antes de 4 segundos");
+                    System.out.println(AMARILLO + "[Main]" + FIN + " meditacion.mp4 ha terminado antes de 4 segundos");
                 }
             }
 
@@ -105,7 +109,7 @@ public class GestorTareas {
         System.out.println("======================================================");
         System.out.println("Todas las descargas han terminado.");
         // Para truncar los decimales me acabó ayudando la IA, no tenía los conocimientos para hacer la operación en una sola línea
-        System.out.println("Tiempo real: " + String.format("%.2f", tiempoTotal / 1_000_000.0) + "ms") ;
+        System.out.println("Tiempo real: " + String.format("%.0f", tiempoTotal / 1_000_000.0) + "ms") ;
         System.out.println("Si no hubiera concurrencia, el programa hubiera tardado: " + tiempoTotalHilosSuma + "ms");
     }
 }

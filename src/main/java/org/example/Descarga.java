@@ -1,8 +1,9 @@
 package org.example;
-
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Descarga extends Thread {
+
+    // Colorines
+    public static final String AZUL = "\u001B[34m";
+    public static final String FIN = "\u001B[0m";
 
     private String archivo;
     private int tiempoBloque;
@@ -23,7 +24,7 @@ public class Descarga extends Thread {
 
     @Override
     public void run() {
-        System.out.println("[Descarga] Descargando: " + archivo);
+        System.out.println(AZUL + "["+archivo + "]" + FIN +" descarga iniciada...");
 
         for (int i = 1; i < 11; i++) {
             // Explicación del sleep aleatorio
@@ -39,7 +40,7 @@ public class Descarga extends Thread {
             // Para implementar un sleep tendremos que hacer un try catch en caso de que se interrumpa el hilo.
             try {
                 Thread.sleep(tiempoBloque);
-                System.out.println("[Descarga] Descargando "+archivo+": "+ i + "0%");
+                System.out.println(AZUL + "["+archivo + "]" + FIN +" Descargando : "+ i + "0%");
             }
             catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -47,6 +48,6 @@ public class Descarga extends Thread {
         }
 
         // Después de que se descarguen los bloques diremos que se ha completado la descarga
-        System.out.println("[Descarga]" + archivo+ " completada en " + getTiempoTotal() + "ms");
+        System.out.println(AZUL + "["+archivo + "]" + FIN + " completada en " + getTiempoTotal() + "ms");
     }
 }
